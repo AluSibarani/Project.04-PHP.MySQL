@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - My Simple Website</title>
+    <link rel="stylesheet" href="contact.css">
+    <style>
+        /* Bonus styling biar karakter counter kelihatan oke */
+        .char-counter {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 4px;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        /* Styling untuk jam digital */
+        #clock {
+            font-size: 1.2rem;
+            font-weight: 600;
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Hubungi Saya</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="blog.php">Blog</a>
+            <a href="contact.html" class="active">Contact</a>
+        </nav>
+        <!-- Jam digital dan tombol dark mode -->
+        <div class="header-right">
+            <div id="clock" title="Jam Digital"></div>
+            <button id="toggleDarkMode" title="Toggle Dark Mode">🌓</button>
+        </div>
+    </header>
+
+    <main>
+        <section class="contact-info">
+            <h2>Informasi Kontak</h2>
+            <p>Email: <a href="mailto:alusibarani026@student.unsrat.ac.id">alusibarani026@student.unsrat.ac.id</a></p>
+            <p>Nomor Telepon: <a href="tel:+6282199489910">0821-9948-9910</a></p>
+        </section>
+
+        <section class="contact-form">
+            <h2>Formulir Kontak</h2>
+            <form action="#" method="post">
+                <label for="name">Nama:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required placeholder="contoh@email.com">
+
+                <label for="message">Pesan:</label>
+                <textarea id="message" name="message" rows="5" maxlength="150" required></textarea>
+                <small class="char-counter" id="charCounter">Tersisa 150 karakter</small>
+
+                <button type="submit">Kirim Pesan</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 ALU SHIAU SIBARANI</p>
+    </footer>
+
+    <script>
+        // Toggle Dark Mode
+        const toggleButton = document.getElementById('toggleDarkMode');
+        const body = document.body;
+
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            body.classList.add('dark-mode');
+        }
+
+        toggleButton.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            const isDark = body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDark ? 'enabled' : 'disabled');
+        });
+
+        // Karakter Counter Pesan
+        const messageInput = document.getElementById('message');
+        const charCounter = document.getElementById('charCounter');
+        const maxChars = 150;
+
+        messageInput.addEventListener('input', () => {
+            const remaining = maxChars - messageInput.value.length;
+            charCounter.textContent = `Tersisa ${remaining} karakter`;
+        });
+
+        // Jam Digital
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+        }
+
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
+</body>
+</html>

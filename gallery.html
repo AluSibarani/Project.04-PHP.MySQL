@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gallery - My Simple Website</title>
+  <link rel="stylesheet" href="gallery.css" />
+</head>
+<body>
+
+  <header>
+    <h1>Gallery</h1>
+
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="blog.php">Blog</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+
+    <!-- Jam dan Dark Mode Toggle -->
+    <div class="header-right">
+      <div id="clock" title="Jam Sekarang"></div>
+      <button id="toggleDarkMode" title="Toggle Dark Mode">🌓</button>
+    </div>
+  </header>
+
+  <main>
+    <h2>Kumpulan Foto</h2>
+    <div class="gallery">
+      <img src="Foto/mssi.jpeg" alt="Foto 1" width="315" />
+      <img src="Foto/ronaldo.jpeg" alt="Foto 2" width="280" />
+      <img src="Foto/neymar.jpeg" alt="Foto 3" width="355" />
+      <img src="Foto/WhatsApp Image 2025-03-10 at 19.35.37_258d43f0.jpg" alt="Foto 4" width="315" />
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; ALU SHIAU SIBARANI</p>
+  </footer>
+
+  <script>
+    // Toggle Dark Mode
+    const toggleButton = document.getElementById('toggleDarkMode');
+    const body = document.body;
+
+    if (localStorage.getItem('darkMode') === 'enabled') {
+      body.classList.add('dark-mode');
+    }
+
+    toggleButton.addEventListener('click', () => {
+      body.classList.toggle('dark-mode');
+      localStorage.setItem('darkMode', body.classList.contains('dark-mode') ? 'enabled' : 'disabled');
+    });
+
+    // Jam Digital
+    function updateClock() {
+      const clock = document.getElementById('clock');
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+      clock.textContent = `${hours}:${minutes}:${seconds}`;
+    }
+
+    setInterval(updateClock, 1000);
+    updateClock(); // inisialisasi
+  </script>
+
+</body>
+</html>
